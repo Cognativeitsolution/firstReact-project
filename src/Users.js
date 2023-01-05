@@ -1,90 +1,138 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AiFillAliwangwang } from "react-icons/ai";
+//import { AiFillAliwangwang } from "react-icons/ai";
 
 function Users() {
-    const [post, setPost] = useState([]);
+    const [tasks, settasks] = useState([]);
+    
+    // useEffect(()=>{
+    //   const getTasks = async () => {
+    //     const tasksFromServer = await fetchTasks()
+    //     settasks(tasksFromServer)
+    //   }
 
-    useEffect(() => {
-      axios.get("https://jsonplaceholder.typicode.com/users").then((data) => {
-        console.log(data);
-        setPost(data?.data);
+    //   getTasks()
+    // }, [])
+  
+    // const token = "28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ";
+    // const fetchTasks = async (task)=>{
+    //   const res = await fetch('http://emp.cognitiveitsolutions.ca/public/api/announcements',{
+    //     method:'GET',
+    //     headers:{
+    //       'Content-type':'application/json',
+    //       'Authorization': 'Bearer ' + token
+    //     },
+    //     body: JSON.stringify(task)
+    //   })
+    //   const data = await res.json()
+    //   return data
+      
+    // }
+    // console.log( tasks.data );
+    //let token = "10|tSCbAhMqXC1MIAae6wYyOMoy7I0ky6Rb6Mx9lkzQ";
+
+    // let token = "10|tSCbAhMqXC1MIAae6wYyOMoy7I0ky6Rb6Mx9lkzQ";
+    // let data = axios.get('http://192.168.18.6:8000/api/announcements', {
+    //   headers: {
+    //     Authorization: 'Bearer ' + token //the token is a variable which holds the token
+    //   }
+
+    //  });
+    
+
+
+
+    // const token = "28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ";
+    // const data = axios.get('http://192.168.18.6:8000/api/announcements', {
+    //   headers: {
+    //     Authorization: 'Bearer ' + token //the token is a variable which holds the token
+    //   }
+
+    //  });
+
+    // console.log( data );
+    
+      useEffect(() => {
+      const token = "29|XRtgHBo6IHwnF919yAvl9UNlL3mGcMjOdVc20S3m";
+      const headers = {
+        'Authorization': 'Bearer ' + token
+    };
+       //axios.get("https://jsonplaceholder.typicode.com/users").then((data) => {
+       axios.get("http://emp.cognitiveitsolutions.ca/public/api/announcements",{headers}).then((data) => {
+
+        //console.log(data.data);
+        settasks(data.data?.data);
       });
-    }, []);
-//   const [tasks, setTasks] = useState([
-//         {
-//             id:1,
-//             name:'Abid',
-//             email:'abid@gmail.com',
-//         },
-//         {
-//             id:2,
-//             name:'Raza',
-//             email:'raza@gmail.com',
-//         },
-//         {
-//             id:3,
-//             name:'Wali',
-//             email:'wali@gmail.com',
-//         }
-//     ]);
+      
+     }, []);
 
-//     const onClicked =(id)=>{
-//         setTasks(
-            
-//             tasks.map((task) =>
-            
-//             task.id === id ? { ...task, name:"ok" } : task
-                
-//             )
-//         )
-//     }
+     // POST request using axios with set headers
+     const token = "29|XRtgHBo6IHwnF919yAvl9UNlL3mGcMjOdVc20S3m";
+//const element = document.querySelector('#post-request-set-headers .article-id');
+const article = { detail: 'Axios POST Request Example' };
+const headers = { 
+    'Authorization': 'Bearer ' + token
+};
+axios.post('http://emp.cognitiveitsolutions.ca/public/api/announcements', article, { headers })
+    .then(response => console.log('posting data',response));
+
+
+
+
+
+  //   axios({
+  //     url: 'http://127.0.0.1/myapi/test.php',
+  //     method: 'get',
+  //     headers: {
+  //         'X-Id-Token': '28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ',
+  //         'Content-Type': 'application/json'
+  //     }
+  //  })
+  //  .then(response => {
+  //     console.log(response)
+  //  }) 
+  //  .catch(err => {
+  //     console.log(err);
+  //  });
+
+    
+
 
   return (
-    // <div><center><h1>Users</h1></center>
-    // <table width="50%" border="1" align="center" >
-    //     <thead>
-    //         <tr>
-    //             <th>Name</th>
-    //             <th>Email</th>
-    //         </tr>
-    //     </thead>
-    //     <tbody>
-    //     {tasks.map((task) => 
-    //         <>
-    //         <tr>
-    //             <td align="center" ><h3 key={task.id} >{task.name}</h3></td>
-    //             <td align="center"><button className="btn_sm btn_secondary" key={task.id} onClick={() => onClicked(task.id)}>check</button></td>
-    //         </tr>
-    //         </>
-    //             )}
-    //     </tbody>
-    // </table>
-    // </div>
     <div>
       <center><h1>USERS</h1></center>
+      
+      {/* {
+            tasks.data.map((task,index) => (
+              
+              <p key={index}>{task.detail}</p>
+               
+            ))
+          } */}
+
       <table width="50%" border="1" align="center" cellPadding="5">
         <thead>
         <tr>
-                    <th>Name</th>
-                    <th>User Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
+                    <th>id</th>
+                    <th>detail</th>
         </tr>
         </thead>
-        <tbody>        
-      {post.map((item, i) => {
+        <tbody>
+          
+         
+           
+      {tasks.map((item, i) => {
         return (
             
                 <tr key={i}>
-                    <td align="center">{item?.name} <AiFillAliwangwang /></td>
-                    <td align="center">{item?.username}</td>
-                    <td align="center">{item?.email}</td>
-                    <td align="center">{item?.address.street}</td>
+                    <td align="center">{item?.id}</td>
+                    <td align="center">{item?.detail}</td>
                 </tr>
          
         );
       })}
+
+    
       </tbody>
       </table>
     </div>
