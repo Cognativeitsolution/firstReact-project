@@ -1,6 +1,33 @@
-import capt from './images/google-recaptcha.png';
+//import capt from './images/google-recaptcha.png';
+import logo from './images/logo_white.png';
 import {Link} from "react-router-dom";
 import $ from 'jquery';
+import axios from "axios";
+import './Config';
+
+const cookie_data =()=>{
+    var email = $("#email").val();
+    var password = $("#password").val();
+
+    document.cookie="my_email="+email+";"+global.localPath;
+    document.cookie="my_password="+password+";"+global.localPath;
+}
+
+const clear_cookie_data =()=>{
+    
+    document.cookie="my_email=;"+global.localPath;
+    document.cookie="my_password=;"+global.localPath;
+}
+
+const get_cookie_data =()=>{
+    var email=global.getCookie('my_email');
+    var password=global.getCookie('my_password');
+    
+    $("#email").val(email);
+    $("#password").val(password);
+}
+
+
 
 const login_submit = () =>{
     var email = $("#email").val();
@@ -16,24 +43,55 @@ const login_submit = () =>{
     else if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
         alert('Please Enter Valid Email Address');
     }else{
-        alert('Success');
+        const headers = global.headers;
+        const article = { email: email, password: password };
+        axios.post(global.baseurl + "api/login",article,{headers}).then((data) => {
+            console.log(data.data);
+            if(data.data.message){
+                alert('Email or Password Not Match...');
+                document.cookie="token=;"+global.localPath;
+            }else{
+                alert('Success...');
+                document.cookie="token="+data.data.data.token+";"+global.localPath;
+                
+                if($('.rememberMe').prop('checked')) {
+                    cookie_data();
+                }else{
+                    clear_cookie_data();
+                }
+            }
+              
+        }).catch((err) => {
+            if (err.response) {
+                alert('Email or Password Not Match...');
+                document.cookie="token=;"+global.localPath;
+              } else if (err.request) {
+                alert('Email or Password Not Match...');
+                document.cookie="token=;"+global.localPath;
+              } else {
+                alert('Email or Password Not Match...');
+                document.cookie="token=;"+global.localPath;
+              }
+      })
+
+        
     }
 }
 function Login() {
   return (
-    <div className="container_login animate__animated animate__bounceIn" >
-        <h1 className="text_center">Employment Agency Tool</h1>
-        <h1 className="color_three text_center">Log-In</h1>
+    <div className="container_login mt4 animate__animated animate__slideInLeft" onLoad={get_cookie_data}>
+        <h1 className="text_center"><img src={logo}  alt="logo" className="logo" width="200" /></h1>
+        <h1 className="color_three text_center mt">Log-In</h1>
         <div className="form">
             
             <div className="form_group">
                 <input type="email" id="email" className="form_control" name="text" placeholder="Email"/>
             </div>
             <div className="form_group">
-                <input type="password" id="password" class="form_control" name="text" placeholder="Password"/>
+                <input type="password" id="password" className="form_control" name="text" placeholder="Password"/>
             </div>
             <label className="checkcontainer">Remember me
-                <input type="checkbox" />
+                <input type="checkbox" className='rememberMe' />
                 <span className="checkmark"></span>
             </label>
             <label className="checkcontainer pull_right">
@@ -42,12 +100,12 @@ function Login() {
             
             <p className="text_right mt0">Register yourself by cliking <Link to="/" className="color_two"> Here</Link></p>
             
-            <img src={capt} width="170" alt="captcha" />
+            {/* <img src={capt} width="170" alt="captcha" /> */}
             
             <div className="text_center">
-                <h3>OR</h3>
+                {/* <h3>OR</h3>
                 <button type="submit" className="btn_light logo_google">SIGN-IN WITH GOOGLE</button>
-                <button type="submit" className="btn_light logo_link">SIGN-IN WITH LINKEDIN</button>
+                <button type="submit" className="btn_light logo_link">SIGN-IN WITH LINKEDIN</button> */}
                 <button type="submit" id="submit" onClick={login_submit} className="btn_primary">LOGIN</button>
             </div>
             

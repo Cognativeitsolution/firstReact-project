@@ -1,107 +1,72 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-//import { AiFillAliwangwang } from "react-icons/ai";
+import './Config';
+import $ from 'jquery';
+import { chk,useGlobalState } from './Config';
+
+const get_cookie_data =()=>{
+  var tokenm=global.getCookie('token');
+  alert(1);
+  $("#tokenm").val(tokenm);
+}
 
 function Users() {
     const [tasks, settasks] = useState([]);
+    const token2 = useGlobalState('token2');
     
-    // useEffect(()=>{
-    //   const getTasks = async () => {
-    //     const tasksFromServer = await fetchTasks()
-    //     settasks(tasksFromServer)
-    //   }
-
-    //   getTasks()
-    // }, [])
-  
-    // const token = "28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ";
-    // const fetchTasks = async (task)=>{
-    //   const res = await fetch('http://emp.cognitiveitsolutions.ca/public/api/announcements',{
-    //     method:'GET',
-    //     headers:{
-    //       'Content-type':'application/json',
-    //       'Authorization': 'Bearer ' + token
-    //     },
-    //     body: JSON.stringify(task)
-    //   })
-    //   const data = await res.json()
-    //   return data
-      
-    // }
-    // console.log( tasks.data );
-    //let token = "10|tSCbAhMqXC1MIAae6wYyOMoy7I0ky6Rb6Mx9lkzQ";
-
-    // let token = "10|tSCbAhMqXC1MIAae6wYyOMoy7I0ky6Rb6Mx9lkzQ";
-    // let data = axios.get('http://192.168.18.6:8000/api/announcements', {
-    //   headers: {
-    //     Authorization: 'Bearer ' + token //the token is a variable which holds the token
-    //   }
-
-    //  });
     
-
-
-
-    // const token = "28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ";
-    // const data = axios.get('http://192.168.18.6:8000/api/announcements', {
-    //   headers: {
-    //     Authorization: 'Bearer ' + token //the token is a variable which holds the token
-    //   }
-
-    //  });
-
+    //const token = window.token;
     // console.log( data );
+    const [count2, setCount] = useState(0);
+    useEffect(() => {
+      setCount(JSON.parse(window.localStorage.getItem('count2')));
+    }, []);
+  
+    useEffect(() => {
+      window.localStorage.setItem('count2', count2);
+    }, [count2]);
+  
     
+      
       useEffect(() => {
-      const token = "29|XRtgHBo6IHwnF919yAvl9UNlL3mGcMjOdVc20S3m";
-      const headers = {
-        'Authorization': 'Bearer ' + token
-    };
+        const headers = global.headers;
        //axios.get("https://jsonplaceholder.typicode.com/users").then((data) => {
-       axios.get("http://emp.cognitiveitsolutions.ca/public/api/announcements",{headers}).then((data) => {
+       axios.get(global.baseurl + "api/announcements",{headers}).then((data) => {
 
         //console.log(data.data);
         settasks(data.data?.data);
       });
       
-     }, []);
+      
+      
+    }, []);
 
-     // POST request using axios with set headers
-     const token = "29|XRtgHBo6IHwnF919yAvl9UNlL3mGcMjOdVc20S3m";
-//const element = document.querySelector('#post-request-set-headers .article-id');
-const article = { detail: 'Axios POST Request Example' };
-const headers = { 
-    'Authorization': 'Bearer ' + token
-};
-axios.post('http://emp.cognitiveitsolutions.ca/public/api/announcements', article, { headers })
-    .then(response => console.log('posting data',response));
+    
+    const signUp_submit = () =>{
+      
+      var name = $("#title").val();
+      const headers = global.headers;
+      const article = { detail: name };
+     
+       
+      axios.post(global.baseurl + "api/announcements",article,{headers}).then((data) => {
+        console.log(data.data);
+        settasks(data.data?.data);
+      });
+       
+     
 
-
-
-
-
-  //   axios({
-  //     url: 'http://127.0.0.1/myapi/test.php',
-  //     method: 'get',
-  //     headers: {
-  //         'X-Id-Token': '28|SAfVBW0FYi17OQmGIQVyNbuOweSsB8HKdkPZdKeZ',
-  //         'Content-Type': 'application/json'
-  //     }
-  //  })
-  //  .then(response => {
-  //     console.log(response)
-  //  }) 
-  //  .catch(err => {
-  //     console.log(err);
-  //  });
-
+      }
     
 
 
   return (
-    <div>
+    <div onLoad={get_cookie_data}>
       <center><h1>USERS</h1></center>
-      
+      <input id="tokenm"></input>
+      {token2}
+      {chk}
+      <h1> Count {count2} </h1>
       {/* {
             tasks.data.map((task,index) => (
               
@@ -109,7 +74,8 @@ axios.post('http://emp.cognitiveitsolutions.ca/public/api/announcements', articl
                
             ))
           } */}
-
+      <center><input type="text" id="title"></input></center>
+      <button onClick={get_cookie_data}>SEND</button>
       <table width="50%" border="1" align="center" cellPadding="5">
         <thead>
         <tr>

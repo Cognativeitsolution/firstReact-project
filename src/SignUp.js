@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import $ from 'jquery';
+import logo from './images/logo_white.png';
 
 const signUp_submit = () =>{
     var name = $("#name").val();
@@ -34,9 +35,9 @@ const signUp_submit = () =>{
 
 function SignUp() {
   return (
-    <div className="container_login animate__animated animate__bounceIn" >
-        <h1 className="text_center">Employment Agency Tool</h1>
-        <h1 className="color_three text_center">Sign-Up</h1>
+    <div className="container_login mt2 animate__animated animate__slideInLeft" >
+        <h1 className="text_center"><img src={logo}  alt="logo" className="logo" width="200" /></h1>
+        <h1 className="color_three text_center mt2">Sign-Up</h1>
         <div className="form">
             <label className="checkcontainer">Worker
                 <input type="radio" checked="checked" name="radio"/>
@@ -66,9 +67,9 @@ function SignUp() {
                 
             </p>
             <div className="text_center">
-                <h3>OR</h3>
+                {/* <h3>OR</h3>
                 <button type="submit" className="btn_light logo_google">SIGN-UP WITH GOOGLE</button>
-                <button type="submit" className="btn_light logo_link">SIGN-UP WITH LINKEDIN</button>
+                <button type="submit" className="btn_light logo_link">SIGN-UP WITH LINKEDIN</button> */}
                 <button type="submit" onClick={signUp_submit} id="submit"  className="btn_primary">SIGN-UP</button>
             </div>
             
