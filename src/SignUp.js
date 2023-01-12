@@ -39,14 +39,14 @@ function SignUp() {
         <h1 className="text_center"><img src={logo}  alt="logo" className="logo" width="200" /></h1>
         <h1 className="color_three text_center mt2">Sign-Up</h1>
         <div className="form">
-            <label className="checkcontainer">Worker
+            {/* <label className="checkcontainer">Worker
                 <input type="radio" checked="checked" name="radio"/>
                 <span className="radiobtn"></span>
             </label>
             <label className="checkcontainer">Company
                 <input type="radio"  name="radio"/>
                 <span className="radiobtn"></span>
-            </label>
+            </label> */}
             <div className="form_group">
                 <input type="text" id="name" className="form_control" name="text" placeholder="Name"/>
             </div>

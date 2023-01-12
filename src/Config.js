@@ -1,16 +1,29 @@
 import { createGlobalState } from "react-hooks-global-state";
 global.baseurl = "http://emp.cognitiveitsolutions.ca/public/";
 global.localPath = "http://localhost:3000/";
-global.token = "111";
-global.headers = {
-    'Authorization': 'Bearer ' + global.token,
-    'XSRF-TOKEN': 'Bearer ' + global.token,
-    'X-XSRF-TOKEN': 'Bearer ' + global.token,
-    "Access-Control-Allow-Origin": "*",
-    'X-CSRF-TOKEN': 'Bearer ' + global.token
-};
+// //global.token = "111";
+// var tokenm='1';
+// global.tokenm=tokenm;
+// global.get_cookie_data =()=>{
+//     tokenm=global.getCookie('token');
+//     global.tokenm=tokenm;
 
-global.getCookie =(cname)=>{
+//     alert(tokenm);
+
+    
+//   }
+
+        // global.tokenm=global.getCookie('token');
+        // global.headers = {
+          
+        //   'Authorization': 'Bearer ' + global.tokenm,
+        //   'XSRF-TOKEN': 'Bearer ' + global.tokenm,
+        //   'X-XSRF-TOKEN': 'Bearer ' + global.tokenm,
+        //   "Access-Control-Allow-Origin": "*",
+        //   'X-CSRF-TOKEN': 'Bearer ' + global.tokenm
+        // };
+
+  global.getCookie =(cname)=>{
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
@@ -25,6 +38,7 @@ global.getCookie =(cname)=>{
     }
     return "";
 }
+
 
 const { setGlobalState, useGlobalState} = createGlobalState({
     token2:'0'

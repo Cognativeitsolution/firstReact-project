@@ -4,16 +4,20 @@ import './Config';
 import $ from 'jquery';
 import { chk,useGlobalState } from './Config';
 
+//var tokenm='';
 const get_cookie_data =()=>{
-  var tokenm=global.getCookie('token');
-  alert(1);
-  $("#tokenm").val(tokenm);
+  // tokenm=global.getCookie('token');
+  // $("#tokenm").val(tokenm);
+  $("#tokenm").val(1);
+  //abc();
+  
 }
 
 function Users() {
     const [tasks, settasks] = useState([]);
     const token2 = useGlobalState('token2');
     
+    const is_agency=global.getCookie('roles');
     
     //const token = window.token;
     // console.log( data );
@@ -27,36 +31,68 @@ function Users() {
     }, [count2]);
   
     
-      
+      // function abc(){
+      //   alert(22);
+      // }
       useEffect(() => {
-        const headers = global.headers;
+        const token=global.getCookie('token');
+        const headers = {
+          'Authorization': 'Bearer ' + token
+        };
+        
        //axios.get("https://jsonplaceholder.typicode.com/users").then((data) => {
        axios.get(global.baseurl + "api/announcements",{headers}).then((data) => {
 
+
         //console.log(data.data);
-        settasks(data.data?.data);
-      });
+         settasks(data.data?.data);
+      // });
       
+            if(data.data.message){
+              alert('Success...');
+              //document.cookie="token=;"+global.localPath;
+              // document.cookie="is_super_admin=;"+global.localPath;
+              // document.cookie="is_agency=;"+global.localPath;
+              // document.cookie="is_company=;"+global.localPath;
+              // document.cookie="is_worker=;"+global.localPath;
+              // document.cookie="roles=;"+global.localPath;
+              // document.cookie="permissions=;"+global.localPath;
+              
+              // window.location.href = global.localPath + "login";
+          }
+            
+      }).catch((err) => {
+          if (err.response) {
+              alert('Email or Password Not Match...');
+              //document.cookie="token=;"+global.localPath;
+            } else if (err.request) {
+              alert('Email or Password Not Match...');
+              //document.cookie="token=;"+global.localPath;
+            } else {
+              alert('Email or Password Not Match...');
+              //document.cookie="token=;"+global.localPath;
+            }
+      })
       
       
     }, []);
 
     
-    const signUp_submit = () =>{
+    // const signUp_submit = () =>{
       
-      var name = $("#title").val();
-      const headers = global.headers;
-      const article = { detail: name };
+    //   var name = $("#title").val();
+    //   const headers = global.headers;
+    //   const article = { detail: name };
      
        
-      axios.post(global.baseurl + "api/announcements",article,{headers}).then((data) => {
-        console.log(data.data);
-        settasks(data.data?.data);
-      });
+    //   axios.post(global.baseurl + "api/announcements",article,{headers}).then((data) => {
+    //     console.log(data.data);
+    //     settasks(data.data?.data);
+    //   });
        
      
 
-      }
+    //   }
     
 
 
@@ -64,6 +100,7 @@ function Users() {
     <div onLoad={get_cookie_data}>
       <center><h1>USERS</h1></center>
       <input id="tokenm"></input>
+      {is_agency}
       {token2}
       {chk}
       <h1> Count {count2} </h1>
