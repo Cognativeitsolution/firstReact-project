@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+
 import { BsBellFill,BsThreeDotsVertical,BsList,BsFillPersonCheckFill,BsLockFill } from "react-icons/bs";
 import { FaCogs } from "react-icons/fa";
 import {Link} from "react-router-dom";
@@ -77,24 +77,24 @@ const logout = () =>{
 
 function Header() {
     //const [tasks, settasks] = useState([]);
-    useEffect(() => {
-            const token=global.getCookie('token');
-            const headers = {
-              'Authorization': 'Bearer ' + token
-            };
-           // const article = {  };
-            axios.get(global.baseurl + "api/roles",{headers}).then((data) => {
-                if(data.data.message){
+    // useEffect(() => {
+    //         const token=global.getCookie('token');
+    //         const headers = {
+    //           'Authorization': 'Bearer ' + token
+    //         };
+    //        // const article = {  };
+    //         axios.get(global.baseurl + "api/roles",{headers}).then((data) => {
+    //             if(data.data.message){
                     
-                    console.log(data);
+    //                 console.log(data);
                     
-                }
+    //             }
                 
-            }).catch(() => {
+    //         }).catch(() => {
                 
-                  window.location.href = global.localPath + "login";
-            })
-    }, []);
+    //               window.location.href = global.localPath + "login";
+    //         })
+    // }, []);
     
   return (
     <>
@@ -113,7 +113,7 @@ function Header() {
                 
             </div>
             <div className='heading_btn'>
-                <h1>Dashboard <label className="lbl_info">Super Admin</label></h1>
+                <h1>Dashboard <label className="lbl_info">Super Admin </label></h1>
                 <h5>Welcome back to the Dashboard.</h5>
                 <p>Scroll down to see quick links and overviews of your Server, To do list Order status or get some Help.</p>
             </div>

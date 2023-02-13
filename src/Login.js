@@ -36,7 +36,7 @@ const login_submit = () =>{
     var email = $("#email").val();
     var password = $("#password").val();
     
-    
+    console.log(email);
     if (email === '' ) {
         alert('Email Field is Empty');
     }
