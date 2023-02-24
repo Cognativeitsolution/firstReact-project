@@ -476,6 +476,18 @@ input:focus {
     margin-left:20px;
     box-shadow: 0px 0px 20px rgb(187, 187, 187);
 }
+.container_header .lbl_orange{
+    background: #ffae00;
+    font-size: 14px;
+    color: #111;
+    padding:10px 30px;
+    border-radius: 5px;
+    font-weight: normal;
+    position:relative;
+    bottom:8px;
+    margin-left:20px;
+    box-shadow: 0px 0px 20px rgb(187, 187, 187);
+}
 .container_header h5{
     margin:0px;
 }

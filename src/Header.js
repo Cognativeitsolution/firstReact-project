@@ -1,4 +1,4 @@
-
+import React, {  } from 'react';
 import { BsBellFill,BsThreeDotsVertical,BsList,BsFillPersonCheckFill,BsLockFill } from "react-icons/bs";
 import { FaCogs } from "react-icons/fa";
 import {Link} from "react-router-dom";
@@ -37,7 +37,14 @@ const collapse = () =>{
     
 }
 
-const logout = () =>{
+
+
+function Header() {
+    
+    const check_is_agency = global.getCookie('is_agency');
+    const check_is_super_admin = global.getCookie('is_super_admin');    
+    
+    const logout = () =>{
         const token=global.getCookie('token');
         const headers = {
           'Authorization': 'Bearer ' + token
@@ -47,7 +54,7 @@ const logout = () =>{
             if(data.data.message){
                 alert('Success...');
                 console.log(data);
-                //document.cookie="token=;"+global.localPath;
+                document.cookie="token=;"+global.localPath;
                 document.cookie="is_super_admin=;"+global.localPath;
                 document.cookie="is_agency=;"+global.localPath;
                 document.cookie="is_company=;"+global.localPath;
@@ -71,30 +78,7 @@ const logout = () =>{
               }
               window.location.href = global.localPath + "login";
         })
-}
-
-
-
-function Header() {
-    //const [tasks, settasks] = useState([]);
-    // useEffect(() => {
-    //         const token=global.getCookie('token');
-    //         const headers = {
-    //           'Authorization': 'Bearer ' + token
-    //         };
-    //        // const article = {  };
-    //         axios.get(global.baseurl + "api/roles",{headers}).then((data) => {
-    //             if(data.data.message){
-                    
-    //                 console.log(data);
-                    
-    //             }
-                
-    //         }).catch(() => {
-                
-    //               window.location.href = global.localPath + "login";
-    //         })
-    // }, []);
+    }
     
   return (
     <>
@@ -113,7 +97,23 @@ function Header() {
                 
             </div>
             <div className='heading_btn'>
-                <h1>Dashboard <label className="lbl_info">Super Admin </label></h1>
+                <h1>Dashboard 
+                {(() => {
+                    if (Number(check_is_agency) === 1) {
+                    return (
+                        <label className="lbl_orange">Agency </label>
+                    )
+                    } else if (Number(check_is_super_admin) === 1) {
+                    return (
+                        <label className="lbl_info">Super Admin</label>
+                    )
+                    } else {
+                    return (
+                        <label className="lbl_info">Free</label>
+                    )
+                    }
+                })()}
+                    </h1>
                 <h5>Welcome back to the Dashboard.</h5>
                 <p>Scroll down to see quick links and overviews of your Server, To do list Order status or get some Help.</p>
             </div>

@@ -63,6 +63,10 @@ function Company() {
             </div>
             <div className='col_12'>
                 <div className="form_group col_4">
+                        <label>Country</label>
+                        <input type="text" className="form_control2" name="text" placeholder="Country"/>
+                </div>
+                <div className="form_group col_4">
                         <label>Province</label>
                         <input type="text" className="form_control2" name="text" placeholder="Province"/>
                 </div>

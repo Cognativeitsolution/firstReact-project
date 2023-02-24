@@ -8,14 +8,8 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import {Link} from "react-router-dom";
 
 
-function Dashboard({authorized}) {
-    console.log(authorized);
-    if(authorized === false){
-        //return window.location.href = global.localPath + "login";
-        console.log(authorized);
-    }else{
-        console.log(authorized);
-    }
+function Dashboard() {
+    
   return (
     <>
         <Sidebar></Sidebar>
