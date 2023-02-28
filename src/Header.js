@@ -52,9 +52,10 @@ function Header() {
         const article = {  };
         axios.post(global.baseurl + "api/destroy",article,{headers}).then((data) => {
             if(data.data.message){
-                alert('Success...');
                 console.log(data);
                 document.cookie="token=;"+global.localPath;
+                document.cookie="name=;"+global.localPath;
+                document.cookie="login_email=;"+global.localPath;
                 document.cookie="is_super_admin=;"+global.localPath;
                 document.cookie="is_agency=;"+global.localPath;
                 document.cookie="is_company=;"+global.localPath;
@@ -106,10 +107,6 @@ function Header() {
                     } else if (Number(check_is_super_admin) === 1) {
                     return (
                         <label className="lbl_info">Super Admin</label>
-                    )
-                    } else {
-                    return (
-                        <label className="lbl_info">Free</label>
                     )
                     }
                 })()}

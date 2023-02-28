@@ -1,21 +1,18 @@
+import loader2 from './images/loader2.gif';
 import React, { useEffect,useState,Suspense,lazy } from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import axios from "axios";
-//import React, { useEffect } from "react";
-//import Login from "./Login";
 import ForgotPassword from './Forgot_password';
-import SignUp from './SignUp';
-import Users from './Users';
-import Counter from './Counter';
-// import Dashboard from './Dashboard';
-
 import Company from './Company';
+import Worker from './Worker';
 import './Config';
 import './css/style.css';
 import './css/animate.min.css';
 const Login = lazy(()=>import('./Login'));
+const SignUp = lazy(()=>import('./SignUp'));
 const Verify = lazy(()=>import('./Verify'));
 const Dashboard = lazy(()=>import('./Dashboard'));
+
 
 function App() {
   const [isLoading, setLoading] = useState(0);
@@ -49,16 +46,15 @@ function App() {
     
     <Router>
         <div className='App' >
-          <Suspense fallback={<div>please wait.</div>}>
+        
+          <Suspense fallback={<div><img src={loader2} width="30%" className='loader2' alt="loader" /></div>}>
           
             <Routes>
                 <Route path='/' exact element={<SignUp/>} />
                 <Route path='/verify' element={<Verify/>} />
                 <Route path='/login' element={<Login/>} />
-                
                 <Route path='/forgot_password' element={<ForgotPassword/>} />
-                <Route path='/users' element={<Users/>} />
-                <Route path='/Counter' element={<Counter/>} />
+                
                 
                 {islogin === 0 ? (
                         <>
@@ -75,6 +71,7 @@ function App() {
                 
                 
                 <Route path='/company' element={<Company/>} />
+                <Route path='/worker' element={<Worker/>} />
                 
             </Routes>
             </Suspense>

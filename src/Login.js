@@ -1,4 +1,4 @@
-//import capt from './images/google-recaptcha.png';
+import loader1 from './images/loader1.gif';
 
 import logo from './images/logo_white.png';
 import {Link} from "react-router-dom";
@@ -40,16 +40,24 @@ function Login() {
     const login_submit = () =>{
         var email = $("#email").val();
         var password = $("#password").val();
+
+        $("#login_submit").hide();
+        $("#loader1").show();
         
-        console.log(email);
         if (email === '' ) {
             alert('Email Field is Empty');
+            $("#login_submit").show();
+            $("#loader1").hide();
         }
         else if (password === '' ) {
             alert('Password Field is Empty');
+            $("#login_submit").show();
+            $("#loader1").hide();
         }
         else if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
             alert('Please Enter Valid Email Address');
+            $("#login_submit").show();
+            $("#loader1").hide();
         }else{
             const token=global.getCookie('token');
             const headers = {
@@ -60,10 +68,14 @@ function Login() {
                 console.log(data.data);
                 if(data.data.message){
                     alert('Email or Password Not Match...');
+                    $("#login_submit").show();
+                    $("#loader1").hide();
                     document.cookie="token=;"+global.localPath;
                 }else{
-                    alert('Success...');
+                    
                     document.cookie="token="+data.data.data.token+";"+global.localPath;
+                    document.cookie="name="+data.data.data.name+";"+global.localPath;
+                    document.cookie="login_email="+data.data.data.email+";"+global.localPath;
                     document.cookie="is_super_admin="+data.data.data.is_super_admin+";"+global.localPath;
                     document.cookie="is_agency="+data.data.data.is_agency+";"+global.localPath;
                     document.cookie="is_company="+data.data.data.is_company+";"+global.localPath;
@@ -90,12 +102,18 @@ function Login() {
                 if (err.response) {
                     alert('Email or Password Not Match...');
                     document.cookie="token=;"+global.localPath;
+                    $("#login_submit").show();
+                    $("#loader1").hide();
                   } else if (err.request) {
                     alert('Email or Password Not Match...');
                     document.cookie="token=;"+global.localPath;
+                    $("#login_submit").show();
+                    $("#loader1").hide();
                   } else {
                     alert('Email or Password Not Match...');
                     document.cookie="token=;"+global.localPath;
+                    $("#login_submit").show();
+                    $("#loader1").hide();
                   }
             })
     
@@ -130,7 +148,9 @@ function Login() {
                 {/* <h3>OR</h3>
                 <button type="submit" className="btn_light logo_google">SIGN-IN WITH GOOGLE</button>
                 <button type="submit" className="btn_light logo_link">SIGN-IN WITH LINKEDIN</button> */}
-                <button type="submit" id="submit" onClick={login_submit}  className="btn_primary">LOGIN</button>
+                <button type="submit" id="login_submit" onClick={login_submit}  className="btn_primary">LOGIN</button>
+                <button type="submit" id="loader1" className="loader_btn"><img src={loader1} width="20" alt="loader" /></button>
+                
             </div>
             
         </div>

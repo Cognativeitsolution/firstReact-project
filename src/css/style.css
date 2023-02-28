@@ -176,6 +176,17 @@ button{
     padding:15px 15px;
     width: 80px;
 }
+.loader2{
+    margin:auto;display:block;margin-top: 12%;
+}
+.loader_btn{
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #111;
+    padding: 12px 0px;
+    color:#fff;
+    transition: 0.5s;
+    display: none;
+}
 .btn_primary{
     background-color: #24aa2a;
     box-shadow: 0px 0px 20px #111;
@@ -246,8 +257,28 @@ button{
     color:#fff;
     padding:30px 70px;
 }
+.container_verify{
+    width:500px;
+    background-color: #fff;
+    box-shadow: 0 0 30px #d9d9d9;
+    border-radius:5px;
+    display: block;
+    margin: auto;
+    color:#111;
+    padding:30px 70px;
+}
 .form{
     padding:10px;
+}
+.container_LB{
+    width:100%;
+    z-index: 9999;
+    position:fixed;
+    top:0px;
+    height: 100%;
+    background: rgba(255,255,255,0.95);
+    overflow: auto;
+    display: none;
 }
 .checkcontainer{
     position: relative;
@@ -383,6 +414,35 @@ input:focus {
     border:none;
     border-bottom:1px solid #24aa2a;
     transition: 0.5s;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.form_control_verify{
+    border:none;
+    border:1px solid #111;
+    padding:3% 1%;
+    margin:1%;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 15.5%;
+    font-size:4em;
+    color:#24aa2a;
+    border-radius: 10px;
+    outline:none;
+    transition: 0.5s;
+}
+.form_control_verify:focus{
+    background:#24aa2a;
+    color:#fff;
 }
 .lightbox{
     display: none;
@@ -663,7 +723,7 @@ input:focus {
 .form_control2{
     border:none;
     width:70%;
-    border:1px solid #24aa2a;
+    border:1px solid #111;
     background: none;
     padding:15px;
     display: block;
@@ -677,7 +737,7 @@ input:focus {
 }
 .form_control2:focus {
     border:none;
-    border:1px solid #111;
+    border:1px solid #24aa2a;
     transition: 0.5s;
 }
 
@@ -776,7 +836,13 @@ input:focus {
     .form_control{
         font-size:13px;
     }
+    
     .container_login{
+        width:auto;
+        padding: 20px 20px;
+        margin-top: auto;
+    }
+    .container_verify{
         width:auto;
         padding: 20px 20px;
         margin-top: auto;
@@ -890,6 +956,11 @@ input:focus {
         font-size:13px;
     }
     .container_login{
+        width:auto;
+        padding: 20px 20px;
+        margin-top: auto;
+    }
+    .container_verify{
         width:auto;
         padding: 20px 20px;
         margin-top: auto;

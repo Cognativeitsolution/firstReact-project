@@ -1,27 +1,9 @@
 import { createGlobalState } from "react-hooks-global-state";
 global.baseurl = "http://emp.cognitiveitsolutions.ca/public/";
 global.localPath = "http://localhost:3000/";
-// //global.token = "111";
-// var tokenm='1';
-// global.tokenm=tokenm;
-// global.get_cookie_data =()=>{
-//     tokenm=global.getCookie('token');
-//     global.tokenm=tokenm;
+// //global.token = "111";http://resume.cognitiveitsolutions.ca/public/
+// var tokenm='1';http://emp.cognitiveitsolutions.ca/public/
 
-//     alert(tokenm);
-
-    
-//   }
-
-        // global.tokenm=global.getCookie('token');
-        // global.headers = {
-          
-        //   'Authorization': 'Bearer ' + global.tokenm,
-        //   'XSRF-TOKEN': 'Bearer ' + global.tokenm,
-        //   'X-XSRF-TOKEN': 'Bearer ' + global.tokenm,
-        //   "Access-Control-Allow-Origin": "*",
-        //   'X-CSRF-TOKEN': 'Bearer ' + global.tokenm
-        // };
 
   global.getCookie =(cname)=>{
     var name = cname + "=";

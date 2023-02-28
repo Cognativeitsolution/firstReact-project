@@ -1,3 +1,4 @@
+import loader1 from './images/loader1.gif';
 import {Link} from "react-router-dom";
 import $ from 'jquery';
 import logo from './images/logo_white.png';
@@ -11,27 +12,44 @@ const signUp_submit = () =>{
     var email = $("#email").val();
     var password = $("#password").val();
     var confirm_password = $("#confirm_password").val();
+
+    $("#signUp_submit").hide();
+    $("#loader1").show();
     
     if (name === '' ) {
         alert('Name Field is Empty');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (email === '' ) {
         alert('Email Field is Empty');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (password === '' ) {
         alert('Password Field is Empty');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (confirm_password === '' ) {
         alert('Confirm Password Field is Empty');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
         alert('Please Enter Valid Email Address');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (password.length < 8) {
         alert('Password Length must be 8 Character');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }
     else if (password !== confirm_password) {
         alert('Password Not Match');
+        $("#signUp_submit").show();
+        $("#loader1").hide();
     }else{
         const token=global.getCookie('token');
         const headers = {
@@ -41,19 +59,7 @@ const signUp_submit = () =>{
           axios.post(global.baseurl + "api/register",article,{headers}).then((data) => {
               console.log(data.data);
               if(data.data.message){
-                
-                //   alert('Email or Password Not Match...');
-                //   document.cookie="token=;"+global.localPath;
               
-                  alert('Success...');
-                  //document.cookie="token="+data.data.data.token+";"+global.localPath;
-                    //   const role = data.data.data.roles;
-                    //   const roles = [
-                    //           role.id,
-                    //           role.name
-                    //       ];
-                    //   document.cookie="roles="+roles+";"+global.localPath;
-                    //   document.cookie="permissions="+data.data.data.permissions+";"+global.localPath;
                  window.location.href = global.localPath + "verify";
               }
                 
@@ -61,11 +67,17 @@ const signUp_submit = () =>{
               if (err.response) {
                 console.log(err.response);
                    alert('Something Wrong');
+                   $("#signUp_submit").show();
+                    $("#loader1").hide();
                 //   document.cookie="token=;"+global.localPath;
                 } else if (err.request) {
                     alert('Something Wrong');
+                    $("#signUp_submit").show();
+                    $("#loader1").hide();
                 } else {
                     alert('Something Wrong');
+                    $("#signUp_submit").show();
+                    $("#loader1").hide();
                 }
                 
           })
@@ -109,7 +121,8 @@ function SignUp() {
                 {/* <h3>OR</h3>
                 <button type="submit" className="btn_light logo_google">SIGN-UP WITH GOOGLE</button>
                 <button type="submit" className="btn_light logo_link">SIGN-UP WITH LINKEDIN</button> */}
-                <button type="submit" onClick={signUp_submit} id="submit"  className="btn_primary">SIGN-UP</button>
+                <button type="submit" onClick={signUp_submit} id="signUp_submit"  className="btn_primary">SIGN-UP</button>
+                <button type="submit" id="loader1" className="loader_btn"><img src={loader1} width="20" alt="loader" /></button>
             </div>
             
         </div>
